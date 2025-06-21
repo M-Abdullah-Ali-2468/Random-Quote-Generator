@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random Quote Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #2c003e, #1a0033);
+      color: #f3f3f3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #3c005a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 30px;
+      color: #ffe066;
+    }
+
+    .mainbody {
+      flex-grow: 1;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+   #quote {
+    font-size: 24px;
+    font-style: italic;
+    color: #fffde7;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 6px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    padding: 25px 30px;
+    width: 800px;
+}
+
+    #author {
+      font-size: 18px;
+      color: #dcdcdc;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 14px 28px;
+      background: linear-gradient(to right, #ffcc00, #ff9900);
+      border: none;
+      border-radius: 30px;
+      color: #2c003e;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(to right, #ffd700, #ffa500);
+    }
+
+    footer {
+      background-color: #2a003e;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      color: #b3aaff;
+      border-top: 1px solid #4d0066;
+    }
+
+    footer nav a {
+      color: #ffd700;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img id="logo" src="logo.png" alt="Random Quote Logo" class="logo" />
+    <h2>Random Quote Generator</h2>
+  </header>
+
+  <div class="mainbody">
+    <p id="quote">Click the button to get inspired!</p>
+    <p id="author"></p>
+    <button onclick="getQuote()">Get Quote</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Random Quote Generator. All rights reserved.</p>
+    <nav>
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Service</a> |
+      <a href="mailto:support@randomquotegenerator.com">Contact Support</a>
+    </nav>
+  </footer>
+
+  <script>
+    async function getQuote() {
+      try {
+        const response = await fetch('https://dummyjson.com/quotes/random');
+        const data = await response.json();
+        document.getElementById('quote').innerText = `"${data.quote}"`;
+        document.getElementById('author').innerText = `— ${data.author}`;
+      } catch (error) {
+        document.getElementById('quote').innerText = "Couldn't fetch a quote. Please try again.";
+        document.getElementById('author').innerText = "";
+      }
+    }
+  </script>
+</body>
+</html>
